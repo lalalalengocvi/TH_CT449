@@ -1,23 +1,22 @@
 const express = require("express");
-const ContactController = require("../controllers/contact.controller");
+const contacts = require("../controllers/contact.controller");
 
 module.exports = app => {
     const router = express.Router();
 
-    router.get("/", contacts.findAll);
-
     router.post("/", contacts.create);
 
-    router.delete("/", contacts.deleteAll);
+    router.get("/", contacts.findAll);
 
     router.get("/favorite", contacts.findAllFavorites);
-    
-    router.get("/:id", contacts.findOne);
+
+    router.get("/:id", contacts.update);
 
     router.put("/:id", contacts.update);
 
-    router.delete(":/id", contacts.delete);
+    router.delete("/:id", contacts.delete);
+
+    router.delete("/",contacts.deleteAll);
 
     app.use("/api/contacts", router);
-
 };
